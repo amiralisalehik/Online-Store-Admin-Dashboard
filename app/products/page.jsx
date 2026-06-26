@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import Link from "next/link";
 import { FiEdit, FiTrash2 } from "react-icons/fi";
 
@@ -29,8 +31,7 @@ export default async function Products() {
             >
               <td className="p-3">{product.title}</td>
               <td className="p-3 flex justify-center gap-5">
-              
-                <Link href={`/products/edit/${product._id}`}> 
+                <Link href={`/products/edit/${product._id}`}>
                   <FiEdit></FiEdit>
                 </Link>
                 <Link href={`/products/delete/${product._id}`}>

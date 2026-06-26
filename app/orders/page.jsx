@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 export default async function Orders() {
   const data = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/orders`);
   const res = await data.json();
@@ -36,10 +38,10 @@ export default async function Orders() {
               <td className="p-3">
                 {item.user.city} - {item.user.postalCode}
               </td>
-              <td className="p-3">{item.totalPrice.toLocaleString("fa-IR")} تومان</td>
               <td className="p-3">
-                {statusMap[item.status] || item.status}
+                {item.totalPrice.toLocaleString("fa-IR")} تومان
               </td>
+              <td className="p-3">{statusMap[item.status] || item.status}</td>
               <td className="p-3">
                 {new Date(item.createdAt).toLocaleDateString("fa-IR")}
               </td>
