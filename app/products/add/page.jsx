@@ -12,22 +12,59 @@ export default function AddProduct() {
     description: "",
   });
 
+  const [errors, setErrors] = useState({});
+
   const router = useRouter();
 
   function handleChange(e) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+
+    if(errors[e.target.name]){
+      setErrors({...errors , [e.target.name]:""})
+    }
   }
+
+  function validate() {
+    let newError = {};
+    let isValid = true;
+
+    if (!formData.title) {
+      newError.title = "وارد کردن نام محصول الزامی است";
+      isValid = false;
+    } else if (formData.title.trim().length < 3) {
+      newError.title = "نام محصول باید بیشتر از 3 کارکتر باشد";
+      isValid = false;
+    }
+    if (!formData.price) {
+      newError.price = "وارد کرد قیمت الزامی است";
+      isValid = false;
+    } else if (formData.price < 0) {
+      newError.price = "قیمت باید یک عدد مثبت باشد";
+      isValid = false;
+    }
+    if (!formData.image) {
+      newError.image = "وارد کردن آدرس تصویر الزامی است";
+      isValid = false;
+    }
+    setErrors(newError);
+    return isValid;
+  }
+
   async function handleSubmit(e) {
     e.preventDefault();
 
-    if (!formData.title || !formData.price || !formData.image) {
-      alert("لطفا تمام فیلدها را تکمیل کنید");
+    if (!validate()) {
       return;
     }
-    if (Number(formData.price) < 0) {
-      alert("قیمت باید عدد مثبت باشد");
-      return;
-    }
+
+    // if (!formData.title || !formData.price || !formData.image) {
+    //   alert("لطفا تمام فیلدها را تکمیل کنید");
+    //   return;
+    // }
+    // if (Number(formData.price) < 0) {
+    //   alert("قیمت باید عدد مثبت باشد");
+    //   return;
+    // }
 
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/products`, {
       method: "POST",
@@ -47,24 +84,25 @@ export default function AddProduct() {
         <form onSubmit={handleSubmit} className="flex flex-col w-full max-w-xl">
           <label className="block mb-1 ">نام محصول</label>
           <input
-            className="w-full mb-3 p-2 border border-gray-100 rounded-md outline-none bg-gray-50"
+            className={`w-full mb-1 p-2 border ${errors.title ? "border-red-700" : "border-gray-100"}  rounded-md outline-none bg-gray-50`}
             onChange={handleChange}
             type="text"
             name="title"
             placeholder="نام محصول"
           ></input>
+          {<p className="text-red-700 mb-2">{errors.title}</p>}
 
           <div className="flex justify-between gap-5">
             <div className="w-full">
               <label className="block mb-1 ">قیمت محصول</label>
               <input
-                className="w-full mb-3 p-2 border border-gray-100 rounded-md outline-none bg-gray-50"
+               className={`w-full mb-1 p-2 border ${errors.price ? "border-red-700" : "border-gray-100"}  rounded-md outline-none bg-gray-50`}
                 onChange={handleChange}
                 type="number"
                 name="price"
-                min={0}
                 placeholder="قیمت محصول به تومان"
               ></input>
+              <p className="text-red-700 mb-2">{errors.price}</p>
             </div>
 
             <div className="w-full">
@@ -83,12 +121,13 @@ export default function AddProduct() {
 
           <label className="block mb-1 ">آدرس تصویر</label>
           <input
-            className="w-full mb-3 p-2 border border-gray-100 rounded-md outline-none bg-gray-50"
+            className={`w-full mb-1 p-2 border ${errors.image ? "border-red-700" : "border-gray-100"}  rounded-md outline-none bg-gray-50`}
             onChange={handleChange}
             type="text"
             name="image"
             placeholder="image url"
           ></input>
+          <p className="text-red-700 mb-2">{errors.image}</p>
 
           <label className="block mb-1 ">توضیحات محصول</label>
           <textarea

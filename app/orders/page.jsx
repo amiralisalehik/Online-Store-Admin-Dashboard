@@ -3,6 +3,7 @@ export const dynamic = "force-dynamic";
 export default async function Orders() {
   const data = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/orders`);
   const res = await data.json();
+  const orders = await res.reverse();
 
   const statusMap = {
     pending: "در انتظار پرداخت",
@@ -13,7 +14,7 @@ export default async function Orders() {
 
   return (
     <div>
-      <h1 className="text-base font-bold">لیست سفارش ها</h1>
+      <h1 className="text-base font-bold">لیست آخرین سفارش ها</h1>
       <table className="w-full border-collapse text-xs my-3">
         <thead>
           <tr className="bg-gray-100 text-gray-700">
@@ -27,7 +28,7 @@ export default async function Orders() {
           </tr>
         </thead>
         <tbody className="text-center text-[10px]">
-          {res.map((item, index) => (
+          {orders.map((item, index) => (
             <tr
               className={`border-b border-gray-200 hover:bg-gray-100 transition-colors
                          ${index % 2 === 0 ? "bg-white" : "bg-gray-50"} `}
