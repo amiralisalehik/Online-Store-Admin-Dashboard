@@ -19,8 +19,8 @@ export default function AddProduct() {
   function handleChange(e) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-    if(errors[e.target.name]){
-      setErrors({...errors , [e.target.name]:""})
+    if (errors[e.target.name]) {
+      setErrors({ ...errors, [e.target.name]: "" });
     }
   }
 
@@ -96,7 +96,7 @@ export default function AddProduct() {
             <div className="w-full">
               <label className="block mb-1 ">قیمت محصول</label>
               <input
-               className={`w-full mb-1 p-2 border ${errors.price ? "border-red-700" : "border-gray-100"}  rounded-md outline-none bg-gray-50`}
+                className={`w-full mb-1 p-2 border ${errors.price ? "border-red-700" : "border-gray-100"}  rounded-md outline-none bg-gray-50`}
                 onChange={handleChange}
                 type="number"
                 name="price"

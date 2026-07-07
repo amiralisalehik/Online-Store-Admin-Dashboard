@@ -1,7 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
-import SideBar from "@/components/SideBar";
+
 
 const iransans = localFont({
   src: [
@@ -33,9 +33,8 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="fa" dir="rtl" className={`${iransans.variable} h-full antialiased`}>
-      <body className="h-screen flex text-xs">
-        <SideBar></SideBar>
-        <main className="flex-1 overflow-y-auto py-18 sm:py-6 px-4 ">{children}</main>
+      <body className="h-screen flex text-sm">
+        {children}
       </body>
     </html>
   );
