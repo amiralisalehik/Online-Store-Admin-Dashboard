@@ -43,10 +43,10 @@ export default async function Users() {
                 <td className="p-3">{admin.role}</td>
 
                 <td className="p-3 flex justify-center gap-5">
-                  <Link href={`/products/edit/${admin._id}`}>
+                  <Link href={`/users/edit/${admin._id}`}>
                     <FiEdit></FiEdit>
                   </Link>
-                  <Link href={`/products/delete/${admin._id}`}>
+                  <Link href={`/users/delete/${admin._id}`}>
                     {" "}
                     <FiTrash2></FiTrash2>{" "}
                   </Link>

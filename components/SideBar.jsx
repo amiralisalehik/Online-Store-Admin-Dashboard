@@ -2,7 +2,14 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { FiMenu, FiX, FiHome, FiBox, FiShoppingCart } from "react-icons/fi";
+import {
+  FiUser,
+  FiMenu,
+  FiX,
+  FiHome,
+  FiBox,
+  FiShoppingCart,
+} from "react-icons/fi";
 
 const urls = [
   { id: 0, title: "داشبورد", src: "/", icon: FiHome },
@@ -10,9 +17,14 @@ const urls = [
   { id: 2, title: "سفارش ها", src: "/orders", icon: FiShoppingCart },
 ];
 
-export default function SideBar({ params }) {
+export default function SideBar({ role }) {
   const pathName = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+
+  const visibleUrls =
+    role === "admin"
+      ? [...urls, { id: 3, title: "کاربران", src: "/users", icon: FiUser }]
+      : urls;
 
   return (
     <>
@@ -39,7 +51,7 @@ export default function SideBar({ params }) {
     
        ${isOpen ? "translate-x-0" : "translate-x-full sm:translate-x-0"}`}
       >
-        {urls.map((url) => {
+        {visibleUrls.map((url) => {
           const Icon = url.icon;
           return (
             <Link

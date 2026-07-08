@@ -3,7 +3,11 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function AddAdmin() {
-  const [formData, setFormData] = useState({ role: "operator" });
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+    role: "operator",
+  });
   const path = useRouter();
 
   const handleChange = (e) => {
