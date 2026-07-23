@@ -42,6 +42,7 @@ export default function EditeUser() {
     );
 
     if (res.ok) {
+      alert("کاربر با موفقیت ویرایش شد")
       router.push("/users");
     }
   };

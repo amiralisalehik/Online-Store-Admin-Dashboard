@@ -9,7 +9,7 @@ export default function AddProduct() {
     price: "",
     category: "لپ تاپ",
     image: "",
-    description: "",
+    desc: "",
   });
 
   const [errors, setErrors] = useState({});
@@ -73,6 +73,7 @@ export default function AddProduct() {
     });
 
     if (res.ok) {
+      alert("محصول جدید اضافه شد");
       router.push("/products");
     }
   }
@@ -133,8 +134,8 @@ export default function AddProduct() {
           <textarea
             className="w-full h-29 resize-none overflow-y-auto  mb-3 p-2 border border-gray-100 rounded-md outline-none bg-gray-50"
             onChange={handleChange}
-            type=""
-            name="description"
+            type="text"
+            name="desc"
             placeholder="توضیحات محصول"
           ></textarea>
           <button

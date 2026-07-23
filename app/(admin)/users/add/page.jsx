@@ -25,6 +25,7 @@ export default function AddAdmin() {
     });
 
     if (res.ok) {
+      alert("کاربر با موفقیت اضافه شد.")
       path.push("/users");
     }
   };

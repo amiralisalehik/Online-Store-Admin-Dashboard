@@ -38,6 +38,7 @@ export default function EditProduct() {
     });
 
     if (res.ok) {
+      alert("محصول مورد نظر با موفقیت ویرایش شد");
       router.push("/products");
     }
   }

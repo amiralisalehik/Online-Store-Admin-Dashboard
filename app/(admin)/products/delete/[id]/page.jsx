@@ -14,8 +14,11 @@ export default function DeleteProduct() {
     if (!res.ok) {
         const error = await res.json();
       alert(error.message || "خطا در حذف محصول")
+    }else{
+      alert("محصول مورد نظر حذف شد");
+      router.push("/products");
     }
-    router.push("/products");
+    
   }catch(error){
         alert("خطا در ارتباط با سرور");
     }
